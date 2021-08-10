@@ -47,8 +47,8 @@ def download_dependency_enrichement_data(by_type='lineage_subtype'):
 
     out = by_type+'_dependency_enrichment.csv'
 
-    data.to_csv(out)
+    data.to_csv(out, index=False)
 
-download_dependency_enrichement_data()
+download_dependency_enrichement_data(by_type='lineage')
 
 
