@@ -12,4 +12,6 @@ The goal of the Dependency Map (DepMap) portal is to empower the research commun
 #
 
 ### Download enrichment data
-[click here]('https://github.com/MayurDivate/DepmapData/tree/main/output')
+[click here](https://github.com/MayurDivate/DepmapData/tree/main/output)
+
+[click here](./output)
