@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import json
+import os
 
 
 
@@ -47,7 +48,7 @@ def download_dependency_enrichement_data(by_type='lineage_subtype'):
 
     out = by_type+'_dependency_enrichment.csv'
 
-    data.to_csv(out, index=False)
+    data.to_csv(os.path.join('output', out), index=False)
 
 download_dependency_enrichement_data(by_type='lineage')
 
