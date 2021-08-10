@@ -19,10 +19,13 @@ class DepmapScraper():
         response = requests.get(self.depmap_url).text
         js = json.loads(response)
 
-        df = pd.DataFrame.from_dict({ i : d for i, d in enumerate(js['data'])}, orient='index')
-        df.columns = js['cols']
-        df['type'] = self.query
-        return df
+        if len(js['data']) > 0:
+            df = pd.DataFrame.from_dict({ i : d for i, d in enumerate(js['data'])}, orient='index')
+            df.columns = js['cols']
+            df['type'] = self.query
+            return df
+
+        return None
 
 
 def download_dependency_enrichement_data(by_type='lineage_subtype'):
@@ -33,9 +36,12 @@ def download_dependency_enrichement_data(by_type='lineage_subtype'):
 
     samples = pd.read_csv('sample_info.csv')
 
-    for typeX in samples[by_type].unique():
+    for typeX in samples[by_type].dropna().unique():
+        print(typeX)
         df = DepmapScraper(typeX).get_data_table()
-        data.append(df)
+
+        if df is not None:
+            data.append(df)
 
     data = pd.concat(data)
 
